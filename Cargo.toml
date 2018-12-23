@@ -1,0 +1,11 @@
+[package]
+name = "loadapi_server"
+version = "0.1.0"
+authors = ["Mathieu Demange <contact@mathieudemange.fr>"]
+
+[dependencies]
+nickel = "*"
+systemstat = "*"
+serde = "*"
+serde_json = "*"
+serde_derive = "*"
