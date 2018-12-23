@@ -1,0 +1,60 @@
+---
+openapi: 3.0.2
+info:
+  title: Load API
+  version: 1.0.0
+paths:
+  /load:
+    get:
+      summary: Get the system load
+      operationId: GetLoad
+      responses:
+        200:
+          description: System Load is available.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoadInformation'
+              examples:
+                SuccessfulResponse:
+                  value: |-
+                    {
+                        "1mnLoad": 62.22,
+                        "5mnLoad": 5.71,
+                        "15mnLoad": 52.89
+                    }
+        503:
+          description: System Load is unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    LoadInformation:
+      title: Root Type for LoadInformation
+      description: The system load during 1mn, 5mn and 15mn.
+      type: object
+      properties:
+        1mnLoad:
+          format: double
+          type: number
+        5mnLoad:
+          format: double
+          type: number
+        15mnLoad:
+          format: double
+          type: number
+      example: "{ \n    \"1mnLoad\": 1.23,\n    \"5mnLoad\": 1.23,\n    \"15mnLoad\"\
+        : 1.23\n}\n"
+    Error:
+      title: Root Type for Error
+      description: Any error message
+      type: object
+      properties:
+        ErrorCode:
+          type: string
+        ErrorMessage:
+          type: string
+      example: "{ \n    \"ErrorCode\": \"E_BIDULE\",\n    \"ErrorMessage\": \"Bla\
+        \ bla bla\"\n}"
