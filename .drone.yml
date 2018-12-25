@@ -6,3 +6,9 @@ steps:
   image: rust
   commands:
   - cargo build --release
+  volumes:
+  - name: workspace
+    path: /drone/src
+volumes:
+- name: workspace
+  temp: {}
