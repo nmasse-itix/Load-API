@@ -3,7 +3,9 @@ rust:
 - '1.25.0'
 cache: cargo
 script:
-- cargo build --release
+- cargo install cross
+- cross build --release --target x86_64-unknown-linux-musl
+#- cargo build --release
 - docker login -p "$DOCKER_PASSWORD" -u "$DOCKER_LOGIN" 
 - docker build -t loadapi_server:dev .
 - docker tag loadapi_server:dev docker.io/nmasse/loadapi_server:dev
