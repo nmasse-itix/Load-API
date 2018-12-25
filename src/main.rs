@@ -6,6 +6,7 @@ extern crate serde;
 
 use nickel::Nickel;
 use nickel::MediaType;
+use nickel::status::StatusCode;
 use systemstat::{System, Platform};
 //extern crate rustc_serialize;
 
@@ -14,6 +15,12 @@ struct LoadInformation {
     oneMinute: f32,
     fiveMinutes:  f32,
     fifteenMinutes: f32
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+struct Error {
+    errorCode: String,
+    errorMessage: String
 }
 
 fn main() {
@@ -46,8 +53,14 @@ fn main() {
                 
                 Err(x) => {
 
-                    //serde_json::to_string(&result).unwrap()
-                    String::from("Failure")
+                    _res.set(StatusCode::ServiceUnavailable);   // HTTP Error 503
+
+                    let result = Error {
+                        errorCode: String::from("E_LOADAVG_UNAVAILABLE"),
+                        errorMessage: String::from("Error while fetching load average from system stats.")
+                    };
+
+                    serde_json::to_string(&result).unwrap()
 
                 }
 
