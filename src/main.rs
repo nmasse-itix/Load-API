@@ -11,16 +11,18 @@ use systemstat::{System, Platform};
 //extern crate rustc_serialize;
 
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
 struct LoadInformation {
-    oneMinute: f32,
-    fiveMinutes:  f32,
-    fifteenMinutes: f32
+    one_minute: f32,
+    five_minutes:  f32,
+    fifteen_minutes: f32
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
 struct Error {
-    errorCode: String,
-    errorMessage: String
+    error_code: String,
+    error_message: String
 }
 
 fn main() {
@@ -40,9 +42,9 @@ fn main() {
                 Ok(loadavg) => {
 
                     let result = LoadInformation {
-                        oneMinute: loadavg.one,
-                        fiveMinutes: loadavg.five,
-                        fifteenMinutes: loadavg.fifteen
+                        one_minute: loadavg.one,
+                        five_minutes: loadavg.five,
+                        fifteen_minutes: loadavg.fifteen
                     };
 
                     serde_json::to_string(&result).unwrap()
@@ -56,8 +58,8 @@ fn main() {
                     _res.set(StatusCode::ServiceUnavailable);   // HTTP Error 503
 
                     let result = Error {
-                        errorCode: String::from("E_LOADAVG_UNAVAILABLE"),
-                        errorMessage: String::from("Error while fetching load average from system stats.")
+                        error_code: String::from("E_LOADAVG_UNAVAILABLE"),
+                        error_message: String::from("Error while fetching load average from system stats.")
                     };
 
                     serde_json::to_string(&result).unwrap()
