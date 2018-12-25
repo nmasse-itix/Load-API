@@ -1,7 +1,6 @@
 FROM rust:slim
 
-ADD . /opt/src
-RUN cd /opt/src && cargo build --release && cp target/release/loadapi_server /loadapi_server && rm -rf target
+ADD target/release/loadapi_server /loadapi_server
 EXPOSE 6767
 ENTRYPOINT [ "/loadapi_server" ]
 CMD [ ]

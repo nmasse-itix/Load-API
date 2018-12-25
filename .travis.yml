@@ -3,8 +3,13 @@ rust:
 - 1.1.0
 cache: cargo
 script:
-- cargo build --verbose --all
+- cargo build --release
+- docker login -p "$DOCKER_PASSWORD" -u "$DOCKER_LOGIN" 
+- docker build -t loadapi_server:dev .
+- docker tag loadapi_server:dev docker.io/nmasse/loadapi_server:dev
+- docker push docker.io/nmasse/loadapi_server:dev
 env:
   global:
-    # travis encrypt "THREESCALE_INVENTORY=$(yaml2json tests/3scale-inventory.yaml|base64)"
-    #secure: "SKrCC5Nd1lXFU9mCrmGUSbqmEFGzT6/3KTXGQ/bASgSx4r0AuDHt48cI/XPQ6XGCIGaxAt2oRWzJZJ00+Y+5A1TCYAXI4X75mTVl+mgZ3ul5hSK1/KfPPoLciZIcv678FLmmpryNRapK+zxG+OKR1puNFQm9himhF9x0JICigFZSVLMLGnpvHDo2GguFv+4aO1tkdZMT5IzBlPD11Kn98QVCruF/dHiBXtSxuo5ja0/uDsGotMcUQRNa637WIQ5D7YgDREpeLrHzmbpW2zr7HI30oA68k+BxZFqlQ/cyI7f5ogNE73ID+FBSSxVXqcn7TD2nmYL3NQpMztTCzM6YlODIuAvdWUxggeBJflpIVoza0HLP7CB76GAmRSkvwGbnGAHWvCOtvczmJ/hXGgAEdRL5q3eJiGebRvhb6SAVMZ3LOH9LlLU9fKDVGqzolFi4+Jaxami600zgBB/yGkFckpapUZLEK2O0QdHBu3bjd7+9C0EgYONrbyMMkMoWr8TiX/y0qTHg3SclOEacDqLw3kb0MAe9V9WtE+MKOAM38lkXN1v1J9x2izeEqKBDDuzxMOsRxQwfSlA5MVW1kOiKaQgKl37F5t+msfIsPDlr2DRM4JTsIBaQKMY9E50tQ0cMW+vU7P+kn8UlNdTh53TLwKMjPcU99XG1f95fGAMocAA="
+    secure: "Hm+jJGJ3hdbXYdBn/gQUlUrvsRiWwycilS+CIihgfJI9RjvqhCGSGl0C2s/8QJXx0YFeI5c+JcpJYyx9hewqRRuWvVmutJZM12+JJqr6cF/XIXS68g1EnhOW3RG07KBm2nVVSUUzHK41U9mDEvinwRw6cpDukB/rtjq77iuYj/NV9V6YZpBCK/eS4tUDCYSw3mmkNksHdhU+vQ7npsgqSfd17EEbzs4kx6g9VyX3b4OIieQkelyc44oj2rYvZ29VwdpZHDCp606eL5AEJw6XJPJfkDh6zd1WPVEeBaQcYx9FL+wpV9+M6PN3FDByibEfwvGLxUTLz4RHgsobRKcrVdcnAg8tZziUUGyNLjJtsks+TfZNIJjjvrk5a052MP8pzF2tcKUZLDW01C2RSPSVqqvhoFFxHPZRjCSwYMAAcCrvwS8BOCpCStfVtBQ8b03w6MUuUDIQIHD+UBHtssvgkf0EcfsSMh+zuSfUvc8fK/CQHYtrnnU7QXO7T1LBXmHD/weprE16/f/pbRnvfMz9ZfNRTtW2kz/wAyQ3wTbwPHsRQCYJQzc/PXvIDlIQEQpOYFZTc/91Fs54vSHdxlYRVMkAExU/TccCLrGVmj4GiULpry4woAqaDNp0W0Fr0P3FxlNyqiOji4vahOVNFykSJqawwpVyRzueBv2HrGwKbLs="
+services:
+  - docker
