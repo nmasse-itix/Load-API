@@ -7,8 +7,9 @@ steps:
   commands:
   - cargo build --release
   volumes:
-  - name: workspace
+  - name: work
     path: /drone/src
+
 volumes:
-- name: workspace
+- name: work
   temp: {}
