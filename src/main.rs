@@ -4,11 +4,8 @@ extern crate serde_json;
 extern crate serde;
 #[macro_use] extern crate serde_derive;
 
-use nickel::Nickel;
-use nickel::MediaType;
-use nickel::status::StatusCode;
+use nickel::{Nickel, MediaType, status::StatusCode};
 use systemstat::{System, Platform};
-//extern crate rustc_serialize;
 
 #[derive(Serialize, Deserialize, Debug)]
 struct LoadInformation {
@@ -51,7 +48,7 @@ fn main() {
                 
                 
                 
-                Err(x) => {
+                Err(_x) => {
 
                     _res.set(StatusCode::ServiceUnavailable);   // HTTP Error 503
 
