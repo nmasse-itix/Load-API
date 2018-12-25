@@ -1,0 +1,10 @@
+language: rust
+rust:
+- 1.1.0
+cache: cargo
+script:
+- cargo build --verbose --all
+env:
+  global:
+    # travis encrypt "THREESCALE_INVENTORY=$(yaml2json tests/3scale-inventory.yaml|base64)"
+    #secure: "SKrCC5Nd1lXFU9mCrmGUSbqmEFGzT6/3KTXGQ/bASgSx4r0AuDHt48cI/XPQ6XGCIGaxAt2oRWzJZJ00+Y+5A1TCYAXI4X75mTVl+mgZ3ul5hSK1/KfPPoLciZIcv678FLmmpryNRapK+zxG+OKR1puNFQm9himhF9x0JICigFZSVLMLGnpvHDo2GguFv+4aO1tkdZMT5IzBlPD11Kn98QVCruF/dHiBXtSxuo5ja0/uDsGotMcUQRNa637WIQ5D7YgDREpeLrHzmbpW2zr7HI30oA68k+BxZFqlQ/cyI7f5ogNE73ID+FBSSxVXqcn7TD2nmYL3NQpMztTCzM6YlODIuAvdWUxggeBJflpIVoza0HLP7CB76GAmRSkvwGbnGAHWvCOtvczmJ/hXGgAEdRL5q3eJiGebRvhb6SAVMZ3LOH9LlLU9fKDVGqzolFi4+Jaxami600zgBB/yGkFckpapUZLEK2O0QdHBu3bjd7+9C0EgYONrbyMMkMoWr8TiX/y0qTHg3SclOEacDqLw3kb0MAe9V9WtE+MKOAM38lkXN1v1J9x2izeEqKBDDuzxMOsRxQwfSlA5MVW1kOiKaQgKl37F5t+msfIsPDlr2DRM4JTsIBaQKMY9E50tQ0cMW+vU7P+kn8UlNdTh53TLwKMjPcU99XG1f95fGAMocAA="
